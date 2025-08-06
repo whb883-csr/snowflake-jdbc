@@ -1,0 +1,1 @@
+{"httpMethod":"GET","queryStringParameters":{"SNOWFLAKE_TEST_WIF_HOST":"sfctest0.snowflakecomputing.com","SNOWFLAKE_TEST_WIF_ACCOUNT":"sfctest0","SNOWFLAKE_TEST_WIF_PROVIDER":"AWS","BRANCH":"master"},"headers":{},"body":null,"isBase64Encoded":false}
