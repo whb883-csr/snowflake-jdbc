@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.Objects;
 import java.util.Properties;
 import net.snowflake.client.category.TestTags;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
@@ -44,8 +45,9 @@ public class WIFLatestIT {
   }
 
   @Test
-  @EnabledIf("isProviderGCPAndMetadataAccessible")
+  @EnabledIf("isProviderGCP")
   void shouldAuthenticateUsingOIDC() {
+    Assumptions.assumeTrue(!Objects.equals(System.getenv("IS_GCP_FUNCTION"), "true"));
     Properties properties = new Properties();
     properties.put("account", ACCOUNT);
     properties.put("authenticator", "WORKLOAD_IDENTITY");
@@ -56,13 +58,6 @@ public class WIFLatestIT {
 
   private static boolean isProviderGCP() {
     return Objects.equals(PROVIDER, "GCP");
-  }
-
-  private static boolean isProviderGCPAndMetadataAccessible() {
-    if (!isProviderGCP()) {
-      return false;
-    }
-    return !Objects.equals(IS_GCP_FUNCTION, "true");
   }
 
   private String getGCPAccessToken() {
